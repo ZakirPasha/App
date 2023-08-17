@@ -2,8 +2,8 @@ import streamlit as st
 import openai
 import googlemaps
 
-openai.api_key = chatkey
-gmaps = googlemaps.Client(key= googlekey)
+openai.api_key = st.secrets[chatkey]
+gmaps = googlemaps.Client(key= st.secrets[googlekey])
 
 st.markdown("""
     <style>
