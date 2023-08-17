@@ -96,7 +96,7 @@ if st.button("Submit"):
         # Initialize the progress bar and status text
         progress_bar = st.progress(0)
         status_text = st.empty()
-        status_text.text("Progress: 0% - Connecting to OpenAI...")
+        status_text.text("Progress: 0% - Searching for the right fit...")
 
         # Fetch data from OpenAI
         response = openai.ChatCompletion.create(
