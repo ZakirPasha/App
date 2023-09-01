@@ -2,7 +2,6 @@ streamlit
 openai
 googlemaps
 langchain
-json
 numpy
 pandas
 gspread
