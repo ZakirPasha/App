@@ -116,6 +116,8 @@ elif choice == 'Help Writing a Query':
                 {"role":"assistant","content":"select merchant_id,shipping_country,sum(gmv_variation) as gmv from core_data.fct_transaction_variations where date_trunc('week',date(dt)) = date_trunc('week',current_date - interval '7' day) group by 1,2 "},
                 {"role":"user","content": "How many distinct users did we have in July 2023? Break it down by client and country"},
                 {"role":"assistant","content":"select client,country_code,count(distinct user_id) as users from core_data.fct_dau_w_bots where date_trunc(‘month’,date(dt)) = date(‘2023-07-01’) group by 1,2"},
+                {"role":"user","content": "Number of transactions on October 2nd 2021?"},
+                {"role":"assistant","content":"select count(distinct transaction_id) as transactions from core_data.fct_transaction_variations where dt = '2021-10-02'"},
                 #this line ensure we use the prompt above
                 {"role":"user","content":main_query}],
                 #0 creativity. Just do what we told you to.
