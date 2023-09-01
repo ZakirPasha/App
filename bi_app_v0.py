@@ -14,6 +14,7 @@ import gspread
 import openai
 import numpy as np
 import json
+import tabulate
 
 # API Keys (consider using environment variables or a secure method to store these)
 openai.api_key = st.secrets["chatkey"]
