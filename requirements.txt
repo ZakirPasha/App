@@ -5,3 +5,4 @@ langchain
 numpy
 pandas
 gspread
+tables
