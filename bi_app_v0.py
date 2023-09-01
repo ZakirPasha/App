@@ -17,6 +17,7 @@ import json
 import tabulate
 
 # API Keys (consider using environment variables or a secure method to store these)
+os.environ['OPENAI_API_KEY'] = st.secrets["chatkey"]
 openai.api_key = st.secrets["chatkey"]
 json_creds = st.secrets["gspread_creds"]
 gc = gspread.service_account_from_dict(json_creds)
