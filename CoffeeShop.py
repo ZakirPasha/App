@@ -37,7 +37,7 @@ st.markdown("""
 def get_recommendations(user_input):
     
     response = openai.ChatCompletion.create(
-      model="gpt-4",
+      model="gpt-3.5-turbo",
       messages=[
             {"role": "system", "content": "Create searchable text based on the users input to send to Google Maps. You are a local tour guide in the city of Chicago helping remote workers find somewhere to temporarily work from for a day like a coffee shop or a hotel. The output should not contain any quotes."},
             {"role": "user", "content": user_input}
@@ -64,7 +64,7 @@ def get_recommendations(user_input):
     ratings = [place.get('rating', 0) for place in top_7_places]
     
     response = openai.ChatCompletion.create(
-      model="gpt-4",
+      model="gpt-3.5-turbo",
       messages=[
             {"role": "system", "content": "You are a local tour guide for the city of Chicago. You will review the users input of places they are considering working from and their requirements and explain why the places are a good fit for them. List out the name and give a 3-5 sentence answer as to why it matches their criteria."},
             {"role": "user", "content": "I wanted to look for: " + query + ". Here are my thoughts:" + ', '.join(names)}
@@ -100,7 +100,7 @@ if st.button("Submit"):
 
         # Fetch data from OpenAI
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "Create searchable text..."},
                 {"role": "user", "content": user_input}
