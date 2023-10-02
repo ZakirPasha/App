@@ -36,6 +36,8 @@ st.markdown("""
 
 def get_recommendations(user_input):
     
+    # Update status text for OpenAI query
+    status_text.text("Progress: 10% - Processing your requirements...")
     response = openai.ChatCompletion.create(
       model="gpt-4",
       messages=[
@@ -43,13 +45,18 @@ def get_recommendations(user_input):
             {"role": "user", "content": user_input}
         ]
     )
-    
     recommendations = response.choices[0].message.content
-        
     query = recommendations
-    result = gmaps.places(query=query, location="Chicago", type = 'cafe')
+
+    # Update status text for Google Maps query
+    status_text.text("Progress: 40% - Searching Google Maps...")
+    progress_bar.progress(40)
+    result = gmaps.places(query=query, location="Chicago", type='cafe')
     places = result.get('results', [])
     
+    # Update status text for filtering places
+    status_text.text("Progress: 60% - Filtering places based on ratings and status...")
+    progress_bar.progress(60)
     filtered_places = [place for place in places if place.get('rating', 0) > 3.5 and place.get('business_status') == "OPERATIONAL"]
     
     # Sort the places by rating in descending order
@@ -96,34 +103,15 @@ if st.button("Submit"):
         # Initialize the progress bar and status text
         progress_bar = st.progress(0)
         status_text = st.empty()
-        status_text.text("Progress: 0% - Searching for the right fit...")
-
-        # Fetch data from OpenAI
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "Create searchable text..."},
-                {"role": "user", "content": user_input}
-            ]
-        )
-        progress_bar.progress(25)
-        status_text.text("Progress: 25% - Querying Google Maps...")
-
-        # ... Continue querying Google Maps, filtering, and sorting
-        # ... [rest of the app code]
-
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "You are a local tour guide..."},
-                {"role": "user", "content": "..."}
-            ]
-        )
-        progress_bar.progress(75)
-        status_text.text("Progress: 75% - Finalizing recommendations...")
-
+        status_text.text("Progress: 0% - Starting the search...")
+        
         # Fetch and display the recommendations
         names, addresses, ratings, reasoning = get_recommendations(user_input)
+        
+        # Update status for finalizing recommendations
+        status_text.text("Progress: 80% - Finalizing recommendations...")
+        progress_bar.progress(80)
+
         for n, a, r, reason in zip(names, addresses, ratings, reasoning):
             st.markdown(f"### 🏢 **{n}**")
             st.markdown(f"📍 [**{a}**](https://www.google.com/maps/search/?api=1&query={a.replace(' ', '+')})")
