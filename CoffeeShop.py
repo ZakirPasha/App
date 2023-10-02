@@ -41,7 +41,7 @@ def get_recommendations(user_input):
     response = openai.ChatCompletion.create(
       model="gpt-4",
       messages=[
-            {"role": "system", "content": "Create searchable text based on the users input to send to Google Maps. You are a local tour guide in the city of Chicago helping remote workers find somewhere to temporarily work from for a day like a coffee shop or a hotel. The output should not contain any quotes."},
+            {"role": "system", "content": "Create searchable text based on the users input to send to Google Maps. You are a local tour guide in the city of Chicago helping remote workers find somewhere to temporarily work from for a day like a coffee shop. The output should not contain any quotes."},
             {"role": "user", "content": user_input}
         ]
     )
