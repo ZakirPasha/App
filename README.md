@@ -1,4 +1,4 @@
-# RemoteWorkCafeFinder
+# Remote Work Cafe Finder
 
 Discover your next favorite remote work spot with Remote Work Cafe Finder, a Streamlit application designed to help digital nomads and remote workers find the perfect coffee shop to work from anywhere in the world. Leveraging the power of Google Maps API and OpenAI, this app provides personalized recommendations based on user preferences including location, opening hours, ratings, and more.
 
